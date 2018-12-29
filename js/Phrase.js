@@ -30,8 +30,10 @@
 				}
 				
 		 };  
+		 
 		/** 
 		* Display phrase on game board 
 		*/ 
+		//this.addPhraseToDisplay();
 	 
  }
