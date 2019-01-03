@@ -25,7 +25,7 @@ document.body.addEventListener('click', function(event) {
 }, false);
 
 const printPhrase = (phrase) => {
-	console.log(`Phrase -phrase: `, phrase.phrase);
+	console.log(`Random Phrase:`, phrase.phrase);
 	//console.log(`Phrase -addPhrase `, phrase.addPhrase );
 	// document.getElementById("phrase").innerHTML = phrase.phrase; 
 	//document.getElementById("phrase").innerHTML = phrase.addPhrase; 

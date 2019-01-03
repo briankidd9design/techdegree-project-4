@@ -15,6 +15,7 @@ class Phrase {
 		for(let i = 0; i < this.phrase.length; i +=1){
 			let myNewListItem = document.createElement('li');
 			let letter = this.phrase[i];
+			console.log("letter" + letter);
 			if (letter === ' '){
 				myNewListItem.className = `space`;
 			}else{
@@ -24,10 +25,8 @@ class Phrase {
 					
 			newPhrase.appendChild(myNewListItem);
 			console.log(" Test: This is the phrase " + this.phrase);
-			
 		}
-	
-				
+			
 	}
 
 }

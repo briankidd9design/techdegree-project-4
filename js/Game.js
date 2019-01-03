@@ -8,7 +8,7 @@ class Game {
 		//this.phrases = [];
 		this.phrases = this.createPhrases();
 		this.activePhrase = null;
-		this.randomPhrase = this.getRandomPhrase();
+		//this.randomPhrase = this.getRandomPhrase();
 	}
 	/** * Creates phrases for use in game 
 	 * @return {array} An array of phrases that could be used in the game
@@ -34,16 +34,18 @@ class Game {
 	getRandomPhrase() {
 		// document.getElementById('phrase').innerHTML = "testing getRandomPhrase()";
 		let randomPhrase = Math.floor(Math.random() * this.phrases.length);
-		return this.phrases[randomPhrase];
+		console.log("randomPhrase from getRandomPhrase " + randomPhrase);
+		return this.phrases[randomPhrase].phrase;
 	}
 	startGame() {
 		let displayedPhrase = this.getRandomPhrase();
+		//console.log("displayedPhrase " + JSON.stringify(displayedPhrase) );
 		this.activePhrase = new Phrase(displayedPhrase);
-		this.activePhrase.addPhraseToDisplay();
-		//this.style.display = "none";
+		this.activePhrase.addPhraseToDisplay(); 
 		document.getElementById("btn__reset").style.display = "none";
 		document.getElementById("overlay").style.display = "none";
-		console.log("Start Game Button Clicked");
+		/* console.log("Start Game Button Clicked");
+		console.log("Active Phrase " + this.activePhrase.addPhraseToDisplay() ); */
 	
 	}
 }
