@@ -119,8 +119,6 @@ removeLife(){
 				button.disabled = true;
 				this.removeLife();
 			}
-			  
-			
 		}
 	} 
 /*resets gameboard to its original state by placing the original classes back, enabling buttons
@@ -143,7 +141,8 @@ adding the hearst back to the game, resetting the this.missed score erasing the 
 		$(document).ready(function() {
 			$(".title").hide().fadeIn(5000);
 		});
-		
+		//resets the chosen array for the keydown event listener
+		chosen = [];
 
 	  }
 }
