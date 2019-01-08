@@ -5,10 +5,8 @@
 class Game {
 	constructor() {
 		this.missed = 0;
-		//this.phrases = [];
 		this.phrases = this.createPhrases();
 		this.activePhrase = null;
-		//this.randomPhrase = this.getRandomPhrase();
 	}
 	/** * Creates phrases for use in game 
 	 * @return {array} An array of phrases that could be used in the game
@@ -32,20 +30,120 @@ class Game {
 	* @return {Object} Phrase object chosen to be used 
 	*/
 	getRandomPhrase() {
-		// document.getElementById('phrase').innerHTML = "testing getRandomPhrase()";
 		let randomPhrase = Math.floor(Math.random() * this.phrases.length);
-		console.log("randomPhrase from getRandomPhrase " + randomPhrase);
 		return this.phrases[randomPhrase].phrase;
 	}
+	/**
+	* Begins game by selecting a random phrase and displaying it to user 
+	*/ 
 	startGame() {
 		let displayedPhrase = this.getRandomPhrase();
-		//console.log("displayedPhrase " + JSON.stringify(displayedPhrase) );
 		this.activePhrase = new Phrase(displayedPhrase);
 		this.activePhrase.addPhraseToDisplay(); 
-		document.getElementById("btn__reset").style.display = "none";
 		document.getElementById("overlay").style.display = "none";
-		/* console.log("Start Game Button Clicked");
-		console.log("Active Phrase " + this.activePhrase.addPhraseToDisplay() ); */
-	
+		const introAudio = new Audio('http://www.briankiddmedia.com/sounds/simonIntroTones.mp3');
+		introAudio.play();
 	}
+	/** 
+	* Checks for winning move 
+	* @return {boolean} True if game has been won, false if game wasn't won
+	*/
+	  checkForWin() {
+		let gameOver = true;	
+		let hiddenLetter = document.getElementsByClassName("hide letter");
+		for(let i = 0; i < hiddenLetter.length; i+=1){
+			if (hiddenLetter !== null){
+			  gameOver = false;
+			}
+		}
+		return gameOver;
+	 } 
+
+	 /** 
+	 * Increases the value of the missed property 
+	 * Removes a life from the scoreboard * Checks if player has remaining lives and ends game if player is out 
+	*/
+removeLife(){
+	
+  this.missed++;
+  let hearts = document.querySelectorAll('.tries');
+   for(let i = 0; i < this.missed; i++ )
+  {
+    hearts[i].innerHTML = '<img src="images/lostHeart.png" alt="Heart Icon" height="35" width="30">';
+
+  } 
+  if(this.missed === 5)
+  {
+  this.gameOver(false);
+  this.missed = 0;
+  }
+
+}		/**
+		 * Displays game over message 
+		* @param {boolean} gameWon - Whether or not the user won the game 
+		*/
+	 gameOver(gameWon){
+		  const overlay = document.getElementById('overlay');
+		   document.getElementById("btn__reset").style.display = "block";
+		  overlay.style.display = 'flex';
+		  const gameOverMessage = document.getElementById("game-over-message");
+
+		  if(gameWon)
+		  {
+			gameOverMessage.innerHTML = "You Won!";
+
+		  }
+		  else
+		  {
+			gameOverMessage.textContent = 'You did not guees the phrase. Try another one';
+			
+		  }
+		  this.resetGame();
+	} 
+	/** 
+	* Handles onscreen keyboard button clicks 
+	* @param (HTMLButtonElement) button - The clicked button element 
+	*/
+	 handleInteraction(button){
+			if(this.activePhrase.checkLetter(button.textContent)){
+				this.activePhrase.showMatchedLetter(button.textContent);
+				button.className = 'chosen';
+			if(this.checkForWin())
+			{
+			  this.gameOver(true);
+			}
+		  } else {
+		  
+			if(button.textContent !== "Start Game"){
+				button.className = "wrong";
+				button.disabled = true;
+				this.removeLife();
+			}
+			  
+			
+		}
+	} 
+/*resets gameboard to its original state by placing the original classes back, enabling buttons
+adding the hearst back to the game, resetting the this.missed score erasing the previous phrase */
+	resetGame(){
+	  let buttons = document.querySelectorAll('BUTTON');
+	  let chars = document.querySelectorAll('li');
+	  let hearts = document.querySelectorAll('.tries');
+	  const ul = document.querySelector('ul');
+	  buttons.forEach(button =>
+		{
+		button.className = 'key';
+		button.disabled = false;
+		})
+
+	  hearts.forEach(heart => heart.innerHTML = '<img src="images/liveHeart.png" alt="Heart Icon" height="35" width="30">')
+	  this.missed = 0;
+		document.querySelector("#phrase ul").innerHTML = " ";
+		/*jQuery fadeIn animation upon reset*/
+		$(document).ready(function() {
+			$(".title").hide().fadeIn(5000);
+		});
+		
+
+	  }
 }
