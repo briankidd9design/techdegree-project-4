@@ -84,13 +84,20 @@ class Game {
 	*/
 	 gameOver(gameWon){
 		  const overlay = document.getElementById('overlay');
-		   document.getElementById("btn__reset").style.display = "block";
+		  document.getElementById("btn__reset").style.display = "block";
 		  overlay.style.display = 'flex';
 		  const gameOverMessage = document.getElementById("game-over-message");
+		  const winningPhrase = document.createElement("h1");
+		  winningPhrase.setAttribute("id", "winningPhrase");
+		  overlay.appendChild(winningPhrase);
+		  const correctPhrase = document.getElementById("winningPhrase");
+		  
 
 		  if(gameWon)
 		  {
 			gameOverMessage.innerHTML = "You Won! Click start game to try another phrase";
+			correctPhrase.innerHTML = "Your phrase was: " + this.activePhrase.phrase.toUpperCase();
+			
 
 		  }
 		  else
