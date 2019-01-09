@@ -63,25 +63,25 @@ class Game {
 	 * Increases the value of the missed property 
 	 * Removes a life from the scoreboard * Checks if player has remaining lives and ends game if player is out 
 	*/
-removeLife(){
-	
-  this.missed++;
-  let hearts = document.querySelectorAll('.tries');
-   for(let i = 0; i < this.missed; i++ )
-  {
-    hearts[i].innerHTML = '<img src="images/lostHeart.png" alt="Heart Icon" height="35" width="30">';
+	removeLife(){
+	  this.missed++;
+	  let hearts = document.querySelectorAll('.tries');
+	   for(let i = 0; i < this.missed; i++ )
+	  {
+		hearts[i].innerHTML = '<img src="images/lostHeart.png" alt="Heart Icon" height="35" width="30">';
 
-  } 
-  if(this.missed === 5)
-  {
-  this.gameOver(false);
-  this.missed = 0;
-  }
+	  } 
+	  if(this.missed === 5)
+	  {
+	  this.gameOver(false);
+	  this.missed = 0;
+	  }
 
-}		/**
-		 * Displays game over message 
-		* @param {boolean} gameWon - Whether or not the user won the game 
-		*/
+	}	
+	/**
+	* Displays game over message 
+	* @param {boolean} gameWon - Whether or not the user won the game 
+	*/
 	 gameOver(gameWon){
 		  const overlay = document.getElementById('overlay');
 		   document.getElementById("btn__reset").style.display = "block";
@@ -90,12 +90,12 @@ removeLife(){
 
 		  if(gameWon)
 		  {
-			gameOverMessage.innerHTML = "You Won!";
+			gameOverMessage.innerHTML = "You Won! Click start game to try another phrase";
 
 		  }
 		  else
 		  {
-			gameOverMessage.textContent = 'You did not guees the phrase. Try another one';
+			gameOverMessage.textContent = "You did not guees the phrase. Try another one";
 			
 		  }
 		  this.resetGame();
@@ -105,22 +105,22 @@ removeLife(){
 	* @param (HTMLButtonElement) button - The clicked button element 
 	*/
 	 handleInteraction(button){
-			if(this.activePhrase.checkLetter(button.textContent)){
-				this.activePhrase.showMatchedLetter(button.textContent);
-				button.className = 'chosen';
-			if(this.checkForWin())
-			{
-			  this.gameOver(true);
-			}
-		  } else {
-		  
-			if(button.textContent !== "Start Game"){
-				button.className = "wrong";
-				button.disabled = true;
-				this.removeLife();
-			}
+		if(this.activePhrase.checkLetter(button.textContent)){
+			this.activePhrase.showMatchedLetter(button.textContent);
+			button.className = 'chosen';
+		if(this.checkForWin())
+		{
+			this.gameOver(true);
 		}
-	} 
+		  }
+		else {
+			if(button.textContent !== "Start Game"){
+			button.className = "wrong";
+			button.disabled = true;
+			this.removeLife();
+		}
+	}
+} 
 /*resets gameboard to its original state by placing the original classes back, enabling buttons
 adding the hearst back to the game, resetting the this.missed score erasing the previous phrase */
 	resetGame(){

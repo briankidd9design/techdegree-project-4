@@ -25,18 +25,17 @@ $(document).ready(function() {
 /*key listender so user can enter text using the keyboard as well as the screen display*/
 var chosen = [];
 let keyListener = (e) => {
-	//let chosen = [];
-	let key;
-	if (!chosen.includes(e.key)) {
-		buttons.forEach(button => {
-			if (button.textContent === e.key) {
+	let key;/*the key variable stores the key that is pressed attaching it to the e parameter*/
+		buttons.forEach(button => {/*this conditional is important as it matches the button content to the key pressed
+		and prevents a used letter from being chosen twice or typed if the button is disabled*/
+			if ( (button.textContent === e.key) && (!chosen.includes(e.key))  && (!button.disabled) ){
 				key = button;
 				chosen.push(e.key);
 				console.log(chosen);
+				game.handleInteraction(key);
 			}
-		});
-	}
-	game.handleInteraction(key);
+		
+		});	
 }
 document.addEventListener('keydown', keyListener);
 
