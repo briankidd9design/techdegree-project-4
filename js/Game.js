@@ -103,6 +103,7 @@ class Game {
 		  else
 		  {
 			gameOverMessage.textContent = "You did not guees the phrase. Try another one";
+			correctPhrase.innerHTML = " ";
 			
 		  }
 		  this.resetGame();
@@ -150,6 +151,5 @@ adding the hearst back to the game, resetting the this.missed score erasing the 
 		});
 		//resets the chosen array for the keydown event listener
 		chosen = [];
-
 	  }
 }
