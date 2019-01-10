@@ -116,6 +116,7 @@ class Game {
 		if(this.activePhrase.checkLetter(button.textContent)){
 			this.activePhrase.showMatchedLetter(button.textContent);
 			button.className = 'chosen';
+			button.disabled = true;
 		if(this.checkForWin())
 		{
 			this.gameOver(true);
