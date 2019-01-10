@@ -31,7 +31,6 @@ let keyListener = (e) => {
 			if ( (button.textContent === e.key) && (!chosen.includes(e.key))  && (!button.disabled) ){
 				key = button;
 				chosen.push(e.key);
-				console.log(chosen);
 				game.handleInteraction(key);
 			}
 		
