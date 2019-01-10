@@ -14,4 +14,4 @@ chossing 5 incorrect letters, the player wins.
 *This appears when the game is loaded in the browser
 
 ##Author
-* **Brian Kidd** *
+* **Brian Kidd** 
